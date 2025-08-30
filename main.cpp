@@ -1,4 +1,5 @@
 #include <wx/wx.h>
+#include <wx/treectrl.h>
 
 class MyApp : public wxApp
 {
@@ -10,6 +11,9 @@ class MyFrame : public wxFrame
 {
 public:
     MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
+
+private:
+    wxTreeCtrl *tree;
 };
 
 wxIMPLEMENT_APP(MyApp);
@@ -24,4 +28,13 @@ bool MyApp::OnInit()
 MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
+    tree = new wxTreeCtrl(this);
+
+    auto root = tree->AddRoot("Root Element");
+    auto child = tree->AppendItem(root, "Child 1");
+
+    tree->AppendItem(child, "Child 2");
+    tree->AppendItem(root, "Child 3");
+
+    tree->Expand(root);
 }
