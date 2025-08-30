@@ -19,7 +19,7 @@
             "name": "(msvc) Launch",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\build\\Debug\\main.exe",
+            "program": "${workspaceFolder}\\build\\main.exe",
             "preLaunchTask": "Build with CMake"
         }
     ]

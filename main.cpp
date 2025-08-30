@@ -16,7 +16,7 @@ wxIMPLEMENT_APP(MyApp);
 
 bool MyApp::OnInit()
 {
-    MyFrame *frame = new MyFrame("Directory Tree Viewer", wxDefaultPosition, wxSize(800, 600));
+    MyFrame *frame = new MyFrame("Directory Tree Viewer", wxPoint(900, 600), wxSize(800, 600));
     frame->Show(true);
     return true;
 }

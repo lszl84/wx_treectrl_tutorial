@@ -25,6 +25,7 @@
             "args": [
                 "-DCMAKE_BUILD_TYPE=Debug",
                 "-S.",
+                "-GNinja",
                 "-Bbuild",
             ]
         }
