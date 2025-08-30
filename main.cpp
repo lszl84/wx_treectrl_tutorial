@@ -14,6 +14,7 @@ public:
 
 private:
     wxTreeCtrl *tree;
+    wxButton *openFolderButton;
 };
 
 wxIMPLEMENT_APP(MyApp);
@@ -29,6 +30,12 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
     tree = new wxTreeCtrl(this);
+    openFolderButton = new wxButton(this, wxID_ANY, "Open Folder...");
+
+    auto sizer = new wxBoxSizer(wxVERTICAL);
+
+    sizer->Add(tree, wxSizerFlags(1).Border().Expand());
+    sizer->Add(openFolderButton, wxSizerFlags().Border().Center());
 
     auto root = tree->AddRoot("Root Element");
     auto child = tree->AppendItem(root, "Child 1");
@@ -37,4 +44,6 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     tree->AppendItem(root, "Child 3");
 
     tree->Expand(root);
+
+    SetSizerAndFit(sizer);
 }
