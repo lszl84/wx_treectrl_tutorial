@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # wxWidgets
-set(wxWidgets_REQUIRED_VERSION "3.2.8")
-set(wxWidgets_REQUIRED_COMPONENTS core base gl)
+set(wxWidgets_REQUIRED_VERSION "3.2.5")
+set(wxWidgets_REQUIRED_COMPONENTS core base)
 
 find_package(wxWidgets ${wxWidgets_REQUIRED_VERSION} QUIET COMPONENTS ${wxWidgets_REQUIRED_COMPONENTS})
 
