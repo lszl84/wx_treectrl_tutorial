@@ -20,7 +20,8 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}\\build\\main.exe",
-            "preLaunchTask": "Build with CMake"
+            "preLaunchTask": "Build with CMake",
+            "cwd": "${workspaceRoot}"
         }
     ]
 }
