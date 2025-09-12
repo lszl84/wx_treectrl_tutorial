@@ -4,6 +4,7 @@
 #include <wx/artprov.h>
 #include <wx/dirdlg.h>
 #include <wx/treectrl.h>
+#include <wx/utils.h>
 #include <wx/wx.h>
 
 namespace fs = std::filesystem;
@@ -110,6 +111,9 @@ void MyFrame::PopulateTree(const fs::path& path, wxTreeItemId parentId)
         });
 
     for (const auto& entry : sortedEntries) {
+
+        wxYield();
+
         wxString name = SafePathToString(entry.path().filename());
 
         if (entry.is_directory(ec)) {
@@ -131,6 +135,10 @@ void MyFrame::PopulateTree(const fs::path& path, wxTreeItemId parentId)
 
 void MyFrame::OpenFolder(const fs::path& rootPath)
 {
+    wxBusyCursor wait;
+
+    openFolderButton->Disable();
+
     tree->DeleteAllItems();
     tree->Refresh();
     tree->Update();
@@ -140,4 +148,6 @@ void MyFrame::OpenFolder(const fs::path& rootPath)
     PopulateTree(rootPath, root);
 
     tree->Expand(root);
+
+    openFolderButton->Enable();
 }
