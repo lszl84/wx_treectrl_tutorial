@@ -29,6 +29,24 @@ private:
 
 wxIMPLEMENT_APP(MyApp);
 
+wxString SafePathToString(const fs::path& p)
+{
+#if defined(__WXMSW__)
+    return p.wstring();
+#else
+    return wxString::FromUTF8(p.string());
+#endif
+}
+
+fs::path SafeStringToPath(const wxString& str)
+{
+#if defined(__WXMSW__)
+    return str.ToStdWstring();
+#else
+    return str.ToStdString();
+#endif
+}
+
 bool MyApp::OnInit()
 {
     MyFrame* frame = new MyFrame("Directory Tree Viewer", wxPoint(900, 600), wxSize(800, 600));
@@ -68,7 +86,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
         wxDirDialog dirDialog(this, "Select a folder to open");
 
         if (dirDialog.ShowModal() == wxID_OK) {
-            this->OpenFolder(dirDialog.GetPath().ToStdString());
+            this->OpenFolder(SafeStringToPath(dirDialog.GetPath()));
         }
     });
 }
@@ -92,7 +110,7 @@ void MyFrame::PopulateTree(const fs::path& path, wxTreeItemId parentId)
         });
 
     for (const auto& entry : sortedEntries) {
-        wxString name = entry.path().filename().string();
+        wxString name = SafePathToString(entry.path().filename());
 
         if (entry.is_directory(ec)) {
             wxTreeItemId item = tree->AppendItem(parentId, name, folderIconIdx);
@@ -117,7 +135,7 @@ void MyFrame::OpenFolder(const fs::path& rootPath)
     tree->Refresh();
     tree->Update();
 
-    wxTreeItemId root = tree->AddRoot(rootPath.filename().string(), folderIconIdx);
+    wxTreeItemId root = tree->AddRoot(SafePathToString(rootPath.filename()), folderIconIdx);
 
     PopulateTree(rootPath, root);
 
