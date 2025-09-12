@@ -4,7 +4,7 @@ Using `wxTreeCtrl` from `wxWidgets` to build directory tree. In this tutorial
 we build a desktop app that compiles to native code on Windows, Mac, 
 and Linux.
 
-See the YouTube video for details.
+See the YouTube video for details: https://www.youtube.com/watch?v=q63j7ZkWfRE
 
 ### System Requirements
 
